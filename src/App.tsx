@@ -12,37 +12,37 @@ import "./App.css";
 const client = new ApolloClient({
   cache: new InMemoryCache(),
   link: new HttpLink({
-    uri: "https://rickandmortyapi.com/graphql/"
+    uri: "http://localhost:4000/graphql"
   })
 });
 
-const GET_CHARACTERS = gql`
+const GET_TOP_HISTORIES = gql`
   {
-    characters {
-      results {
-        name
-        species
+    hn {
+      topStories(limit: 2) {
+        title
+        url
       }
     }
   }
 `;
 
 type QueryProps = {
-  name: string;
-  species: string;
+  title: string;
+  url: string;
 };
 
 const Data: React.FC = () => {
-  const { loading, error, data } = useQuery(GET_CHARACTERS);
+  const { loading, error, data } = useQuery(GET_TOP_HISTORIES);
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error </p>;
   return (
     <div>
       <ul>
-        {data.characters.results.map(({ name, species }: QueryProps) => (
-          <li key={name}>
-            <p>name {name}</p>
-            <p>species: {species}</p>
+        {data.hn.topStories.map(({ title, url }: QueryProps) => (
+          <li key={title}>
+            <p>title {title}</p>
+            <p>url: {url}</p>
           </li>
         ))}
       </ul>
