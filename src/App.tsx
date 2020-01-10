@@ -1,26 +1,64 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import {
+  ApolloProvider,
+  ApolloClient,
+  HttpLink,
+  InMemoryCache,
+  useQuery,
+  gql
+} from "@apollo/client";
+import "./App.css";
+
+const client = new ApolloClient({
+  cache: new InMemoryCache(),
+  link: new HttpLink({
+    uri: "https://rickandmortyapi.com/graphql/"
+  })
+});
+
+const GET_CHARACTERS = gql`
+  {
+    characters {
+      results {
+        name
+        species
+      }
+    }
+  }
+`;
+
+type QueryProps = {
+  name: string;
+  species: string;
+};
+
+const Data: React.FC = () => {
+  const { loading, error, data } = useQuery(GET_CHARACTERS);
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error </p>;
+  return (
+    <div>
+      <ul>
+        {data.characters.results.map(({ name, species }: QueryProps) => (
+          <li key={name}>
+            <p>name {name}</p>
+            <p>species: {species}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
 
 const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ApolloProvider client={client}>
+      <div className="App">
+        <p>Normal App</p>
+        <Data />
+      </div>
+    </ApolloProvider>
   );
-}
+};
 
 export default App;
