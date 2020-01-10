@@ -4,9 +4,9 @@ import {
   ApolloClient,
   HttpLink,
   InMemoryCache,
-  useQuery,
-  gql
+  useQuery
 } from "@apollo/client";
+import { GET_TOP_HISTORIES as TOP_STORIES } from "./queries";
 import "./App.css";
 
 const client = new ApolloClient({
@@ -16,24 +16,13 @@ const client = new ApolloClient({
   })
 });
 
-const GET_TOP_HISTORIES = gql`
-  {
-    hn {
-      topStories(limit: 2) {
-        title
-        url
-      }
-    }
-  }
-`;
-
 type QueryProps = {
   title: string;
   url: string;
 };
 
 const Data: React.FC = () => {
-  const { loading, error, data } = useQuery(GET_TOP_HISTORIES);
+  const { loading, error, data } = useQuery(TOP_STORIES(5));
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error </p>;
   return (
