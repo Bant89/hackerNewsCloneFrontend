@@ -1,16 +1,27 @@
 import { gql, DocumentNode } from "@apollo/client";
 
-export const GET_TOP_HISTORIES = (amount: number): DocumentNode => gql`
+enum Categories {
+  NEW = "newStories",
+  TOP = "topStories",
+  SHOW = "showStories",
+  ASK = "askStories",
+  JOB = "jobStories"
+}
+
+export const GET_DATA = (
+  offset: number,
+  category: Categories
+): DocumentNode => gql`
   {
     hn {
-      topStories(limit: ${amount}) {
+      ${category} (limit: 5, offset: ${offset}) {
         title
         url
+        type
+        timeISO
+        score
+        descendants
       }
     }
   }
 `;
-
-// export const GET_NEW_HISTORIES = gql``;
-
-// export const GET_JOB_HISTORIES = gql``;
