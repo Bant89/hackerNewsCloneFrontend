@@ -6,6 +6,20 @@ export enum Categories {
   JOB = "jobStories"
 }
 
+export type NavDataProps = {
+  start: number;
+  offset: number;
+  setOffset: (x: number) => void;
+  setStart: (x: number) => void;
+  setCategory: (x: Categories) => void;
+};
+
+export type ListDataProps = {
+  start: number;
+  offset: number;
+  category: Categories;
+};
+
 export type AuthorType = {
   id: number;
   about: string;
@@ -19,9 +33,4 @@ export type QueryProps = {
   timeISO: string;
   descendants: number;
   by: AuthorType;
-};
-
-export type DataProps = {
-  amount: number;
-  category: Categories;
 };
