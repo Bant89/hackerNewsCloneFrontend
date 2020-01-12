@@ -1,12 +1,5 @@
 import { gql, DocumentNode } from "@apollo/client";
-
-enum Categories {
-  NEW = "newStories",
-  TOP = "topStories",
-  SHOW = "showStories",
-  ASK = "askStories",
-  JOB = "jobStories"
-}
+import { Categories } from "./types";
 
 export const GET_DATA = (
   offset: number,

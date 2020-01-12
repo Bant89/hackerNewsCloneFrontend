@@ -1,24 +1,7 @@
 import React, { useState } from "react";
 import { useQuery } from "@apollo/client";
 import { GET_DATA } from "../queries";
-
-type QueryProps = {
-  title: string;
-  url: string;
-};
-
-type DataProps = {
-  amount: number;
-  category: Categories;
-};
-
-enum Categories {
-  NEW = "newStories",
-  TOP = "topStories",
-  SHOW = "showStories",
-  ASK = "askStories",
-  JOB = "jobStories"
-}
+import { Categories, QueryProps } from "../types";
 
 const List: React.FC<{}> = () => {
   const [category, setCategory] = useState(Categories.TOP);
@@ -75,14 +58,14 @@ const List: React.FC<{}> = () => {
             Give me more
           </button>
         </nav>
-        <ul>
+        <ol>
           {data.hn[category].map(({ title, url }: QueryProps) => (
             <li key={title}>
               <p>title {title}</p>
               <p>url: {url}</p>
             </li>
           ))}
-        </ul>
+        </ol>
       </div>
     );
   }
