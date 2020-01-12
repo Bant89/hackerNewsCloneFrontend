@@ -135,8 +135,8 @@ const List: React.FC<{}> = () => {
                 </PHeader>
                 <br />
                 <PDetails>
-                  {score} points by {by.id} on {formatDate(timeISO)} ago | hide
-                  | {descendants} comments
+                  {score} points by {by.id} on {formatDate(timeISO)} ago |{" "}
+                  {descendants} comments
                 </PDetails>
               </LI>
             )
