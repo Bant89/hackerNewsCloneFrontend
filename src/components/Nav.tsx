@@ -33,6 +33,7 @@ const Nav: React.FC<NavDataProps> = ({
         onClick={() => {
           setOffset(0);
           setStart(1);
+          handleClick(Categories.TOP);
         }}
       >
         <b>Hacker News</b>

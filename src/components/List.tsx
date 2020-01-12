@@ -34,6 +34,7 @@ const List: React.FC<ListDataProps> = ({
     color: #333;
   `;
   const LI = styled.li`
+    margin-bottom: 5px;
     text-align: left;
     width: auto;
   `;

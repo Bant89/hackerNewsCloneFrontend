@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import {
   ApolloProvider,
   ApolloClient,
@@ -26,18 +27,20 @@ const App: React.FC = () => {
     width: 85vw;
   `;
   return (
-    <ApolloProvider client={client}>
-      <Div>
-        <Nav
-          start={start}
-          offset={offset}
-          setOffset={setOffset}
-          setStart={setStart}
-          setCategory={setCategory}
-        />
-        <List start={start} offset={offset} category={category} />
-      </Div>
-    </ApolloProvider>
+    <BrowserRouter>
+      <ApolloProvider client={client}>
+        <Div>
+          <Nav
+            start={start}
+            offset={offset}
+            setOffset={setOffset}
+            setStart={setStart}
+            setCategory={setCategory}
+          />
+          <List start={start} offset={offset} category={category} />
+        </Div>
+      </ApolloProvider>
+    </BrowserRouter>
   );
 };
 
