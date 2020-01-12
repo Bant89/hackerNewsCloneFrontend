@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useQuery } from "@apollo/client";
+import styled from "styled-components";
 import { GET_DATA } from "../queries";
 import { Categories, QueryProps } from "../types";
 
@@ -11,62 +12,107 @@ const List: React.FC<{}> = () => {
   };
   const { loading, error, data } = useQuery(GET_DATA(offset, category));
   if (loading) return <p>Loading...</p>;
+  const Container = styled.div`
+    margin: 20px auto;
+    width: 80vw;
+    outline: 1px solid red;
+  `;
+  const Nav = styled.nav`
+    display: flex;
+    background-color: #ff6600;
+  `;
+  const Ol = styled.ol`
+    background-color: rgb(246, 246, 239);
+    margin: 0;
+  `;
+  const PHeader = styled.p`
+    margin: 0;
+    display: inline;
+    width: auto;
+  `;
+  const Button = styled.button`
+    background-color: Transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+  `;
+  const PDetails = styled.p`
+    margin: 0;
+    display: inline;
+    width: auto;
+    font-size: 0.8em;
+    color: grey;
+  `;
+  const LI = styled.li`
+    text-align: left;
+    width: auto;
+  `;
   if (data.hn[category] !== undefined) {
     return (
-      <div>
-        <nav>
-          <button
+      <Container>
+        <Nav>
+          <Button
             onClick={() => {
               handleClick(Categories.NEW);
             }}
           >
             New
-          </button>
-          <button
+          </Button>
+          <Button
             onClick={() => {
               handleClick(Categories.ASK);
             }}
           >
             Ask
-          </button>
-          <button
+          </Button>
+          <Button
             onClick={() => {
               handleClick(Categories.TOP);
             }}
           >
             Top
-          </button>
-          <button
+          </Button>
+          <Button
             onClick={() => {
               handleClick(Categories.SHOW);
             }}
           >
             Show
-          </button>
-          <button
+          </Button>
+          <Button
             onClick={() => {
               handleClick(Categories.JOB);
             }}
           >
             Job
-          </button>
-          <button
+          </Button>
+          <Button
             onClick={() => {
               setOffset(offset + 5);
             }}
           >
             Give me more
-          </button>
-        </nav>
-        <ol>
-          {data.hn[category].map(({ title, url }: QueryProps) => (
-            <li key={title}>
-              <p>title {title}</p>
-              <p>url: {url}</p>
-            </li>
-          ))}
-        </ol>
-      </div>
+          </Button>
+        </Nav>
+        <Ol>
+          {data.hn[category].map(
+            ({ title, url, score, descendants, timeISO, by }: QueryProps) => (
+              <LI key={title}>
+                <PHeader>
+                  {title} ({url})
+                </PHeader>
+                <br />
+                <PDetails>
+                  {score} points by {by.id} {timeISO} ago | hide | {descendants}{" "}
+                  comments
+                </PDetails>
+              </LI>
+            )
+          )}
+        </Ol>
+      </Container>
     );
   }
 

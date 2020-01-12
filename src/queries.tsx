@@ -7,13 +7,16 @@ export const GET_DATA = (
 ): DocumentNode => gql`
   {
     hn {
-      ${category} (limit: 5, offset: ${offset}) {
+      ${category} (limit: 30, offset: ${offset}) {
+        id
         title
         url
-        type
-        timeISO
         score
+        timeISO
         descendants
+        by {
+          id
+        }
       }
     }
   }
