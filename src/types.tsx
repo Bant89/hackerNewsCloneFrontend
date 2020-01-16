@@ -25,6 +25,21 @@ export type AuthorType = {
   about: string;
 };
 
+export type ItemSearchProps = {
+  id: number;
+  by: object;
+  title: string;
+  score: number;
+  descendants: number;
+  kids: object;
+};
+
+export type DetailsItemParams = {
+  by: AuthorType;
+  timeISO: string;
+  text: string;
+};
+
 export type QueryProps = {
   id: number;
   title: string;

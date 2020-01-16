@@ -10,6 +10,7 @@ import { Categories } from "./types";
 import styled from "styled-components";
 import Nav from "./components/Nav";
 import List from "./components/List";
+import Detail from "./components/Detail";
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
@@ -29,16 +30,25 @@ const App: React.FC = () => {
   return (
     <BrowserRouter>
       <ApolloProvider client={client}>
-        <Div>
-          <Nav
-            start={start}
-            offset={offset}
-            setOffset={setOffset}
-            setStart={setStart}
-            setCategory={setCategory}
-          />
-          <List start={start} offset={offset} category={category} />
-        </Div>
+        <Switch>
+          <Div>
+            <Route path="/">
+              <Nav
+                start={start}
+                offset={offset}
+                setOffset={setOffset}
+                setStart={setStart}
+                setCategory={setCategory}
+              />
+            </Route>
+            <Route exact path="/">
+              <List start={start} offset={offset} category={category} />
+            </Route>
+            <Route path="/comment/:id">
+              <Detail></Detail>
+            </Route>
+          </Div>
+        </Switch>
       </ApolloProvider>
     </BrowserRouter>
   );

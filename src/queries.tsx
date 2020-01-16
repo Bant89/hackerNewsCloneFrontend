@@ -16,8 +16,32 @@ export const GET_DATA = (
         descendants
         by {
           id
+          about
         }
       }
     }
   }
 `;
+
+export const GET_COMMENT = (id: string): DocumentNode => gql`{
+  hn {
+    item(id: ${id}) {
+      id
+      by {
+        id
+      }
+      title
+      score
+      descendants
+      timeISO
+      kids {
+        id
+        by {
+          id
+        }
+        timeISO
+        text
+      }
+    }
+  }
+}`;

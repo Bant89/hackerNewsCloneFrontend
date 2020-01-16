@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import { Categories, NavDataProps } from "../types";
 
 const Nav: React.FC<NavDataProps> = ({
@@ -29,58 +30,60 @@ const Nav: React.FC<NavDataProps> = ({
   };
   return (
     <Container>
-      <Button
-        onClick={() => {
-          setOffset(0);
-          setStart(1);
-          handleClick(Categories.TOP);
-        }}
-      >
-        <b>Hacker News</b>
-      </Button>
-      <Button
-        onClick={() => {
-          handleClick(Categories.NEW);
-        }}
-      >
-        New |
-      </Button>
-      <Button
-        onClick={() => {
-          handleClick(Categories.ASK);
-        }}
-      >
-        Ask |
-      </Button>
-      <Button
-        onClick={() => {
-          handleClick(Categories.TOP);
-        }}
-      >
-        Top |
-      </Button>
-      <Button
-        onClick={() => {
-          handleClick(Categories.SHOW);
-        }}
-      >
-        Show |
-      </Button>
-      <Button
-        onClick={() => {
-          handleClick(Categories.JOB);
-        }}
-      >
-        Job
-      </Button>
-      <Button
-        onClick={() => {
-          setOffset(offset + 5);
-          setStart(start + 30);
-        }}
-      >
-        Give me more
-      </Button>
+      <Link to="/">
+        <Button
+          onClick={() => {
+            setOffset(0);
+            setStart(1);
+            handleClick(Categories.TOP);
+          }}
+        >
+          <b>Hacker News</b>
+        </Button>
+        <Button
+          onClick={() => {
+            handleClick(Categories.NEW);
+          }}
+        >
+          New |
+        </Button>
+        <Button
+          onClick={() => {
+            handleClick(Categories.ASK);
+          }}
+        >
+          Ask |
+        </Button>
+        <Button
+          onClick={() => {
+            handleClick(Categories.TOP);
+          }}
+        >
+          Top |
+        </Button>
+        <Button
+          onClick={() => {
+            handleClick(Categories.SHOW);
+          }}
+        >
+          Show |
+        </Button>
+        <Button
+          onClick={() => {
+            handleClick(Categories.JOB);
+          }}
+        >
+          Job
+        </Button>
+        <Button
+          onClick={() => {
+            setOffset(offset + 5);
+            setStart(start + 30);
+          }}
+        >
+          Give me more
+        </Button>
+      </Link>
     </Container>
   );
 };

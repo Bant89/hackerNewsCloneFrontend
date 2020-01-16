@@ -1,6 +1,7 @@
 import React from "react";
 import { useQuery } from "@apollo/client";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import { GET_DATA } from "../queries";
 import { Categories, QueryProps, ListDataProps } from "../types";
 
@@ -54,7 +55,7 @@ const List: React.FC<ListDataProps> = ({
     return (
       <Ol start={start}>
         {data.hn[category].map(
-          ({ title, url, score, descendants, timeISO, by }: QueryProps) => (
+          ({ id, title, url, score, descendants, timeISO, by }: QueryProps) => (
             <LI key={title}>
               <PHeader>
                 <A href={url} target="_blank">
@@ -64,8 +65,10 @@ const List: React.FC<ListDataProps> = ({
               <br />
               <PDetails>
                 {score} points by {by.id} on {formatDate(timeISO)} ago |{" "}
-                {descendants} comments
               </PDetails>
+              <Link to={`/comment/${id}`} style={{ textDecoration: "none" }}>
+                <PDetails>{descendants} comments</PDetails>
+              </Link>
             </LI>
           )
         )}
