@@ -1,8 +1,9 @@
 import React from "react";
 import { useQuery } from "@apollo/client";
+import { Query } from "react-apollo";
 import { useParams } from "react-router-dom";
-import { GET_COMMENT } from "../../queries"
-import { QueryProps, DetailsItemParams } from "../../types"
+import { GET_COMMENT, GET_KIDS } from "../../queries"
+import { QueryProps, DetailsItemParams, DetailsKidsProps } from "../../types"
 import { PHeader, PDetails, A, Author, CommentDetail } from './styles'
 
 const formatDate = (str: string): string => {
@@ -36,7 +37,7 @@ const Detail: React.FC<{}> = () => {
       by
     }: QueryProps = data.hn.item;
     return (
-      <div style={{ backgroundColor: "#f6f6ef" }}>
+      <div style={{ backgroundColor: "#f6f6ef", padding: "10px 0 0 20px" }}>
         <PHeader>
           <A href={url} target="_blank">
             {title}
@@ -60,16 +61,11 @@ const Detail: React.FC<{}> = () => {
   }
 };
 
-const getData = (id: string): React.FC<{}> => {
-  const appendResults = []
-  const listOfItems = 
-}
-
 const Comment: React.FC<DetailsItemParams> = ({ by, timeISO, text }) => {
  
   let content = { __html: text};
   return (
-    <div style={{ padding: '0 10px 10px 5px'}}>
+    <div style={{ marginLeft: '20px'}}>
       <Author>
         {by.id} {formatDate(timeISO)}
       </Author>

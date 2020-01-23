@@ -34,6 +34,14 @@ export type ItemSearchProps = {
   kids: object;
 };
 
+export type DetailsKidsProps = {
+  id: number;
+  by: object;
+  text: string;
+  timeISO: string;
+  kids: object;
+}
+
 export type DetailsItemParams = {
   by: AuthorType;
   timeISO: string;

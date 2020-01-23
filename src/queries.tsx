@@ -49,8 +49,18 @@ export const GET_COMMENT = (id: string): DocumentNode => gql`{
 export const GET_KIDS = (id: string) : DocumentNode => gql`{
   hn {
     item(id: ${id}) {
-      
+      by {
+        id
+      }
+      text
+      timeISO
+      kids {
+        id
+        text
+        by {
+          id
+        }
+      }
     }
   }
-
 }`;
