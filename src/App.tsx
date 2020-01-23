@@ -10,7 +10,7 @@ import { Categories } from "./types";
 import styled from "styled-components";
 import Nav from "./components/Nav";
 import List from "./components/List";
-import Detail from "./components/Detail";
+import Detail from './components/Detail';
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),

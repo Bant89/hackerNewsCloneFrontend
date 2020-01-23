@@ -1,9 +1,9 @@
 import React from "react";
-import styled from "styled-components";
 import { useQuery } from "@apollo/client";
 import { useParams } from "react-router-dom";
-import { GET_COMMENT } from "../queries";
-import { QueryProps, DetailsItemParams } from "../types";
+import { GET_COMMENT } from "../../queries"
+import { QueryProps, DetailsItemParams } from "../../types"
+import { PHeader, PDetails, A, Author, CommentDetail } from './styles'
 
 const formatDate = (str: string): string => {
   let dt = str.split(/[: T-]/).map(parseFloat);
@@ -22,23 +22,6 @@ const Detail: React.FC<{}> = () => {
   let { id = "1" } = useParams();
   const { loading, error, data } = useQuery(GET_COMMENT(id));
 
-  const PHeader = styled.p`
-    margin: 0;
-    display: inline;
-    width: auto;
-  `;
-
-  const PDetails = styled.p`
-    margin: 0;
-    display: inline;
-    width: auto;
-    font-size: 0.8em;
-    color: grey;
-  `;
-  const A = styled.a`
-    text-decoration: none;
-    color: #333;
-  `;
 
   if (loading) {
     return <p>Loading...</p>;
@@ -53,7 +36,7 @@ const Detail: React.FC<{}> = () => {
       by
     }: QueryProps = data.hn.item;
     return (
-      <div>
+      <div style={{ backgroundColor: "#f6f6ef" }}>
         <PHeader>
           <A href={url} target="_blank">
             {title}
@@ -77,13 +60,20 @@ const Detail: React.FC<{}> = () => {
   }
 };
 
+const getData = (id: string): React.FC<{}> => {
+  const appendResults = []
+  const listOfItems = 
+}
+
 const Comment: React.FC<DetailsItemParams> = ({ by, timeISO, text }) => {
+ 
+  let content = { __html: text};
   return (
-    <div style={{ backgroundColor: "#edd1a4" }}>
-      <p>
+    <div style={{ padding: '0 10px 10px 5px'}}>
+      <Author>
         {by.id} {formatDate(timeISO)}
-      </p>
-      <p>{text}</p>
+      </Author>
+      <CommentDetail dangerouslySetInnerHTML={content}></CommentDetail>
     </div>
   );
 };
